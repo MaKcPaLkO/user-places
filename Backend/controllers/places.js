@@ -123,11 +123,21 @@ const updatePlace = async (req, res, next) => {
     return next(error)
   }
 
+  const puid = place.creator.toString();
+
+  if (place.creator.toString() !== req.userData.userId) {
+    const error = new HttpError("Access denied", 401);
+    return next(error)
+  }
+
   let prevImage = place.image;
 
   place.title = title;
   place.description = description;
-  place.image = req.file.path;
+  if (place.image && req.file) {
+    place.image = req.file.path;
+  }
+
 
   try {
     await place.save();
