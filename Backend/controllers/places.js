@@ -1,7 +1,6 @@
 const fs = require("fs");
 const HttpError = require("../models/http-error");
 const mongoose = require("mongoose");
-const { v4: uuid } = require("uuid");
 const { validationResult } = require("express-validator");
 const Place = require("../models/place");
 const User = require("../models/user");
@@ -123,8 +122,6 @@ const updatePlace = async (req, res, next) => {
     return next(error)
   }
 
-  const puid = place.creator.toString();
-
   if (place.creator.toString() !== req.userData.userId) {
     const error = new HttpError("Access denied", 401);
     return next(error)
@@ -165,6 +162,11 @@ const deletePlace = async (req, res, next) => {
   if (!place) {
     const error = new HttpError('Could not find place for this id.', 404);
     return next(error);
+  }
+
+  if (place.creator.id !== req.userData.userId) {
+    const error = new HttpError("Access denied", 403);
+    return next(error)
   }
 
   const imagePath = place.image;
