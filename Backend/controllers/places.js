@@ -183,9 +183,7 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  fs.unlink(imagePath, err => {
-    console.log(err)
-  });
+  fs.unlink(imagePath, err => {});
 
   res.status(200).json({message: "The place was deleted"});
 }
