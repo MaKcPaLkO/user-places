@@ -31,7 +31,7 @@ const PlaceItem = ({image, title, description, id, address, creator: creatorId, 
     setShowConfirmModal(false)
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/places/${id}`,
         'DELETE',
         null,
         {Authorization: "Bearer " + auth.token});
@@ -72,7 +72,7 @@ const PlaceItem = ({image, title, description, id, address, creator: creatorId, 
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay/>}
           <div className="place-item__image">
-            <img src={`http://localhost:5000/${image}`} alt={title}/>
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={title}/>
           </div>
           <div className="place-item__info">
             <h2>{title}</h2>
