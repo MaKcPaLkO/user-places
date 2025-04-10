@@ -43,7 +43,7 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500).json({message: error.message || "An unknown error occurred"})
 })
 
-mongoose.connect("mongodb+srv://mpalko:o67JXq7lw30R6sys@mp-first.alivu.mongodb.net/mern?retryWrites=true&w=majority&appName=MP-First")
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@mp-first.alivu.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=MP-First`)
   .then(() => {
     app.listen(5000);
   })
