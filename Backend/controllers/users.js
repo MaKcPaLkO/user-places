@@ -73,7 +73,7 @@ const signup = async (req, res, next) => {
         name: newUser.name,
         email: newUser.email
       },
-      'fish_glove_cube',
+      process.env.JWT_KEY,
       { expiresIn: '1h' }
     );
   } catch (err) {
@@ -125,7 +125,7 @@ const login = async (req, res, next) => {
         name: existingUser.name,
         email: existingUser.email
       },
-      'fish_glove_cube',
+      process.env.JWT_KEY,
       { expiresIn: '1h' }
     );
   } catch (err) {
