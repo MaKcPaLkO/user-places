@@ -13,7 +13,7 @@ const ImageUpload = props => {
 
   useEffect(() => {
     if (props.initialImage ) {
-      setPreviewUrl(`http://localhost:5000/${props.initialImage}`)
+      setPreviewUrl(`${process.env.REACT_APP_ASSET_URL}/${props.initialImage}`)
     }
   }, [props.initialImage])
 
