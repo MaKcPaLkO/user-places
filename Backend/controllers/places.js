@@ -15,7 +15,6 @@ const getAllPlaces = async (req, res, next) => {
     return next(error);
   }
 
-
   res.status(200).json({places: places.map( place => place.toObject({ getters: true }))})
 }
 
@@ -63,19 +62,19 @@ const createNewPlace = async (req, res, next) => {
     return next(new HttpError("Invalid inputs passed, please check your data", 422));
   }
 
-  const { title, description, address, creator } = req.body;
+  const { title, description, address } = req.body;
   const createdPlace = new Place({
     title,
     description,
     address,
     image: req.file.path,
-    creator
+    creator: req.userData.userId
   });
 
   let user;
 
   try {
-    user = await User.findById(creator);
+    user = await User.findById(req.userData.userId);
   } catch (err) {
     const error = new HttpError("Creating place failed", 500);
     return next(error);
