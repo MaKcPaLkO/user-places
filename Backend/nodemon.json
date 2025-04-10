@@ -1,8 +1,0 @@
-{
-    "env": {
-        "DB_USER": "mpalko",
-        "DB_PASSWORD": "o67JXq7lw30R6sys",
-        "DB_NAME": "mern",
-        "JWT_KEY": "fish_glove_cube"
-    }
-}
